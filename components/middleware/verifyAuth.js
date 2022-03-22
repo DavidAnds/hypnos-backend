@@ -4,13 +4,13 @@ module.exports = (req, res, next) => {
     try {
         const token = req.headers.authorization.split(' ')[1];
         const decodedToken = jwt.verify(token,'SECRET_TOKEN');
-        const adminId = decodedToken.adminId;
+        const user = decodedToken;
         
 
-        if (req.body.adminId && req.body.adminId !== adminId) {
+        if (req.body.userId && req.body.userId !== user.id) {
             throw 'Invalid admin ID';
         } else {
-            req.auth = {adminId}
+            req.user = user
             next();
         }
     } catch {

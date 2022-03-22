@@ -2,7 +2,7 @@ const { DataTypes, Sequelize } = require('sequelize');
 const Database = require('../database/database');
 const Hotel = require('../hotel/hotelModel');
 
-const Manager = Database.define('managers', {
+const BackUser = Database.define('backUsers', {
     id: {
         type: DataTypes.UUID,
         defaultValue: Sequelize.UUIDV4,
@@ -29,8 +29,12 @@ const Manager = Database.define('managers', {
         type: DataTypes.STRING,
         AllowNull: false,
     },
+    role: {
+        type: DataTypes.STRING,
+        defaultValue: "manager"
+    }
 });
 
-Manager.belongsTo(Hotel);
+BackUser.belongsTo(Hotel);
 
-module.exports = Manager;
+module.exports = BackUser;

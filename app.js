@@ -9,21 +9,32 @@ const setHeader = require('./components/middleware/setHeader')
 const hotelRoutes = require('./components/hotel/hotelRoutes.js');
 const adminRoutes = require('./components/admin/adminRoutes');
 const managerRoutes = require('./components/manager/managerRoutes');
+const backUserRoutes = require('./components/backUser/backUserRoutes');
 const Database = require('./components/database/database.js');
 
 
 // Acces to all request
-app.use(setHeader);
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader(
+        'Access-Control-Allow-Headers',
+        'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization'
+    );
+    res.setHeader(
+        'Access-Control-Allow-Methods',
+        'GET, POST, PUT, DELETE, PATCH, OPTIONS'
+    );
+    next();
+});
 
 // Routes
-app.use('/hotel', hotelRoutes);
-app.use('/admin', adminRoutes);
-app.use('/manager', managerRoutes);
+app.use('/api/hotel', hotelRoutes);
+app.use('/api/admin', adminRoutes);
+app.use('/api/manager', managerRoutes);
+app.use('/api/back/user', backUserRoutes);
 
 Database.sync()
     .then(() => console.log('connexion a la BDD'))
     .catch((err) => console.log(err));
-
-app.listen(3000, () => console.log('Listening on Port 3000'));
 
 module.exports = app;
