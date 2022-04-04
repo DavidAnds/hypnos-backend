@@ -1,7 +1,7 @@
 module.exports = (req, res, next) => {
-    if (req.user.id !== req.params.id || req.user.role !== 'admin') {
-         res.status(401).json({ error: 'no acces for you' });
+    if (req.user.id === req.params.id || req.user.role === 'admin') {
+        next();
     } else {
-        next()
+        res.status(401).json({ error: 'no acces for you' });
     }
 };

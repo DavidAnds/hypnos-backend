@@ -1,28 +1,23 @@
 const { DataTypes, Sequelize } = require('sequelize');
+const Suite = require('../suite/suiteModel')
 const Database = require('../database/database');
 
-const hotel = Database.define('hotels', {
+const GalleryImage = Database.define('galleryImage', {
     id: {
         type: DataTypes.UUID,
         defaultValue: Sequelize.UUIDV4,
         primaryKey: true,
         AllowNull: false,
     },
-    name: {
-        type: DataTypes.STRING,
-        AllowNull: false,
-    },
-    city: {
-        type: DataTypes.STRING,
-        AllowNull: false,
-    },
-    adress: {
-        type: DataTypes.STRING,
-        AllowNull: false,
-    },
     description: {
         type: DataTypes.TEXT,
     },
+    imageURL: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
 });
 
-module.exports = hotel
+GalleryImage.belongsTo(Suite);
+
+module.exports = GalleryImage;

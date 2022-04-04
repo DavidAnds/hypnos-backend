@@ -8,7 +8,7 @@ router.post('/signup', backUserCtrl.signup);
 router.post('/login', backUserCtrl.login);
 router.get('/logout', verifyAuth, verifyAdmin, backUserCtrl.logout);
 router.get('/refresh', verifyAuth, backUserCtrl.refresh);
-router.get('/getAll', verifyAuth, backUserCtrl.getAll);
+router.get('/getAll', backUserCtrl.getAll);
 router.get('/getOne/:id', verifyAuth, verifyAdmin, backUserCtrl.getOne);
 router.put('/updateInfo/:id',verifyAuth, verifyAdmin, backUserCtrl.updateInfo);
 router.put('/updatePassword/:id', verifyAuth, verifyAdmin, backUserCtrl.updatePassword);

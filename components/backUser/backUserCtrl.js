@@ -1,4 +1,5 @@
 const BackUser = require('../backUser/backUserModel');
+const Hotel = require('../hotel/hotelModel')
 const bcrypt = require('bcrypt');
 const { hash } = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -42,6 +43,7 @@ exports.login = (req, res, next) => {
                         ? (hotelId = 'All hotel')
                         : (hotelId = user.hotelId);
                     res.status(201).json({
+                        id: user.id,
                         role: user.role,
                         hotelId,
                         token: jwt.sign(
@@ -60,10 +62,11 @@ exports.login = (req, res, next) => {
 
 exports.refresh = (req,res,next) => {
     res.status(201).json({
+        id: req.user.id,
         role: req.user.role,
         hotelId: req.user.hotelId,
         token: jwt.sign(
-            { id: req.user.id, role: req.user.role, hotelId },
+            { id: req.user.id, role: req.user.role, hotelId: req.user.hotelId },
             'SECRET_TOKEN',
             {
                 expiresIn: '24h',
@@ -83,6 +86,7 @@ exports.getAll = (req, res) => {
     BackUser.findAll({
         where: { role: 'manager' },
         attributes: { exclude: ['createdAt', 'updatedAt'] },
+        include: Hotel,
     })
         .then((user) => res.status(200).json(user))
         .catch((error) => res.status(400).json({ error }));
@@ -91,6 +95,7 @@ exports.getAll = (req, res) => {
 exports.getOne = (req, res) => {
     BackUser.findByPk(req.params.id, {
         attributes: { exclude: ['createdAt', 'updatedAt'] },
+        include: Hotel,
     })
         .then((user) => res.status(200).json(user))
         .catch((error) => res.status(400).json({ error }));

@@ -1,17 +1,17 @@
 const express = require('express');
 const app = express();
+const path = require('path');
 app.use(express.json());
 
 // Middleware
-const setHeader = require('./components/middleware/setHeader')
+const setHeader = require('./components/middleware/setHeader');
 
 // Routes
 const hotelRoutes = require('./components/hotel/hotelRoutes.js');
-const adminRoutes = require('./components/admin/adminRoutes');
-const managerRoutes = require('./components/manager/managerRoutes');
 const backUserRoutes = require('./components/backUser/backUserRoutes');
+const suiteRoutes = require('./components/suite/suiteRoutes');
+const galleryImageRoutes = require('./components/galleryImage/galleryImageRoutes')
 const Database = require('./components/database/database.js');
-
 
 // Acces to all request
 app.use((req, res, next) => {
@@ -29,9 +29,10 @@ app.use((req, res, next) => {
 
 // Routes
 app.use('/api/hotel', hotelRoutes);
-app.use('/api/admin', adminRoutes);
-app.use('/api/manager', managerRoutes);
 app.use('/api/back/user', backUserRoutes);
+app.use('/api/suite', suiteRoutes);
+app.use('/api/gallery', suiteRoutes);
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 Database.sync()
     .then(() => console.log('connexion a la BDD'))

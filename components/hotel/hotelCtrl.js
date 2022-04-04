@@ -2,7 +2,7 @@ const Hotel = require('./hotelModel');
 
 exports.createOne = (req, res) => {
     if (!req.body.adress || !req.body.name || !req.body.city) {
-        return res.status(400).json({ error: "lack of information" });
+        return res.status(400).json({ error: 'lack of information' });
     }
     Hotel.create({ ...req.body })
         .then(() => res.status(201).json({ message: 'hotel created' }))
@@ -28,9 +28,10 @@ exports.getOne = (req, res) => {
 exports.updateOne = (req, res) => {
     Hotel.findByPk(req.params.id)
         .then((hotel) => {
-            req.body.name ? (hotel.name = req.body.name) : hotel.name;
-            req.body.city ? (hotel.city = req.body.city) : hotel.city;
-            req.body.adress ? (hotel.adress = req.body.adress) : hotel.adress;
+            hotel.name = req.body.name;
+            hotel.city = req.body.city;
+            hotel.adress = req.body.adress;
+            hotel.description = req.body.description;
             hotel
                 .save()
                 .then(() => res.status(201).json({ msg: 'hotel updated' }))
@@ -40,7 +41,7 @@ exports.updateOne = (req, res) => {
 };
 
 exports.deleteOne = (req, res) => {
-    Hotel.destroy({where: {id: req.params.id}})
-    .then(() =>res.status(201).json({ msg: 'hotel deleted' }))
-    .catch(error => res.status(400).json({error}))
+    Hotel.destroy({ where: { id: req.params.id } })
+        .then(() => res.status(201).json({ msg: 'hotel deleted' }))
+        .catch((error) => res.status(400).json({ error }));
 };
