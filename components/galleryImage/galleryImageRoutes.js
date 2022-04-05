@@ -5,7 +5,7 @@ const multer = require('../middleware/multer-config');
 const galleryImageCtrl = require('./galleryImageCtrl')
 
 router.post('/createOne', verifyAuth, multer, galleryImageCtrl.createOne)
-router.delete('/deleteOne', verifyAuth, multer, galleryImageCtrl.deleteOne )
-router.delete('/getAll/:suiteId', galleryImageCtrl.getAll )
+router.delete('/deleteOne/:id', verifyAuth, multer, galleryImageCtrl.deleteOne )
+router.get('/getAll/:suiteId', galleryImageCtrl.getAll )
 
 module.exports = router;

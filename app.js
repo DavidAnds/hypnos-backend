@@ -31,7 +31,7 @@ app.use((req, res, next) => {
 app.use('/api/hotel', hotelRoutes);
 app.use('/api/back/user', backUserRoutes);
 app.use('/api/suite', suiteRoutes);
-app.use('/api/gallery', suiteRoutes);
+app.use('/api/gallery', galleryImageRoutes);
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
 Database.sync()
