@@ -23,6 +23,12 @@ const hotel = Database.define('hotels', {
     description: {
         type: DataTypes.TEXT,
     },
+    imageURL: {
+        type: DataTypes.STRING
+    },
+    imageDescription: {
+        type: DataTypes.TEXT
+    }
 });
 
 module.exports = hotel

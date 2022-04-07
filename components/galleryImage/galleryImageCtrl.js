@@ -29,6 +29,7 @@ exports.deleteOne = (req, res) => {
 
 exports.getAll = (req, res) => {
     GalleryImage.findAll({
+        where: { suiteId: req.params.suiteId },
         attributes: { exclude: ['createdAt', 'updatedAt'] },
     })
         .then((images) => res.status(200).json(images))
