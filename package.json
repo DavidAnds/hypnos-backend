@@ -2,7 +2,7 @@
   "name": "hypnos-backend",
   "version": "1.0.0",
   "description": "The backend of a suite reservation website for Hypnos",
-  "main": "index.js",
+  "main": "server.js",
   "dependencies": {
     "bcrypt": "^5.0.1",
     "dotenv": "^16.0.0",
@@ -16,7 +16,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "node server.js"
+    "start": "nodemon app.js"
   },
   "author": "",
   "license": "ISC"
