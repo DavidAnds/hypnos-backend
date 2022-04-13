@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const port = process.env.PORT || 8080;
 app.use(express.json());
 
 // Routes
@@ -41,6 +40,6 @@ Database.sync()
     .then(() => console.log('connexion a la BDD'))
     .catch((err) => console.log(err));
 
-app.listen(port);
-console.log(`Server is litening on port ${port}`);
+app.listen(process.env.PORT || 8080);
+console.log(`Server is litening on port ${process.env.PORT || 8080}`);
 // module.exports = app;
