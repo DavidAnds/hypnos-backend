@@ -1,4 +1,5 @@
 const Suites = require('./suiteModel');
+const Hotel = require('../hotel/hotelModel')
 const fs = require('fs');
 
 exports.createOne = (req, res) => {
@@ -28,6 +29,7 @@ exports.getAll = (req, res) => {
 exports.getOne = (req, res) => {
     Suites.findByPk(req.params.id, {
         attributes: { exclude: ['createdAt', 'updatedAt'] },
+        include:Hotel,
     })
         .then((suite) => res.status(200).json(suite))
         .catch((error) => res.status(400).json({ error }));

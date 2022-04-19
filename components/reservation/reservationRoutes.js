@@ -4,8 +4,9 @@ const verifyAuth = require('../middleware/verifyAuth')
 const reservationCtrl = require('./reservationCtrl');
 
 router.post('/createOne',verifyAuth, reservationCtrl.createOne);
-router.get('/getAll/:suiteId', reservationCtrl.getAll);
-router.get('/getMany/:userId', reservationCtrl.getMany);
+router.get('/getAll/:userId', reservationCtrl.getAll);
+router.get('/getAllFromSuite/:suiteId', reservationCtrl.getAllFromSuite);
+router.delete('/deleteOne/:id', verifyAuth, reservationCtrl.deleteOne);
 
 
 module.exports = router;
