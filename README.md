@@ -35,7 +35,7 @@ Après l'avoir crée, vous pouvez, importer le fichier sql hypnos.sql qui vas vo
 `hypnos_db` < hypnos.sql
 
 ```
-
+mail: admin@hypnos.com mdp: admin123
 Ensuite, il faut connecter votre base de données à notre à notre application pour cela, rendez vous dans components/database/database.js et modifié les valeurs suivantes par vos propres valeurs:
 
 ```
